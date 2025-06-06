@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak from Nuhad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Dancing+Script:wght@700&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold-light: #f8d56c;
+            --gold-dark: #f7a440;
+            --blue-dark: #0a3d62;
+            --blue-light: #1e5799;
+            --white: #ffffff;
+            --cream: #fffaf0;
+            --red: #c53030;
+            --green: #2e8b57;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            color: var(--white);
+            perspective: 1000px;
+        }
+        
+        .scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="%230a3d62"/><circle cx="10%" cy="15%" r="1" fill="%23ffffff" opacity="0.8"/><circle cx="25%" cy="30%" r="1.5" fill="%23ffffff" opacity="0.7"/><circle cx="75%" cy="20%" r="1.2" fill="%23ffffff" opacity="0.9"/><circle cx="90%" cy="40%" r="0.8" fill="%23ffffff" opacity="0.6"/><circle cx="50%" cy="70%" r="1.3" fill="%23ffffff" opacity="0.7"/><circle cx="30%" cy="85%" r="1.1" fill="%23ffffff" opacity="0.8"/><circle cx="65%" cy="60%" r="0.9" fill="%23ffffff" opacity="0.5"/></svg>');
+            animation: twinkle 8s infinite alternate;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border-radius: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4), 
+                        0 0 50px rgba(248, 213, 108, 0.3),
+                        inset 0 0 40px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            padding: 40px 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+        }
+        
+        .card:hover {
+            transform: rotateY(5deg);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, var(--gold-light), var(--gold-dark), var(--red), var(--green), var(--gold-light));
+            z-index: 11;
+            animation: colorShift 10s infinite linear;
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 3.5rem;
+            color: var(--gold-light);
+            text-shadow: 0 0 20px rgba(248, 213, 108, 0.6);
+            margin-bottom: 10px;
+            font-weight: bold;
+            line-height: 1.2;
+            letter-spacing: 3px;
+            animation: textGlow 3s infinite alternate;
+        }
+        
+        .title {
+            font-size: 3.8rem;
+            color: var(--white);
+            font-weight: 800;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(to right, var(--gold-light), var(--gold-dark), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold-light), var(--gold-dark), transparent);
+            border-radius: 10px;
+        }
+        
+        .divider {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--gold-light), var(--gold-dark), transparent);
+            margin: 25px auto;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        .message {
+            font-size: 1.7rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin: 0 auto 40px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateZ(30px);
+        }
+        
+        .message::before, .message::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--gold-light);
+            position: absolute;
+            opacity: 0.3;
+        }
+        
+        .message::before {
+            top: -5px;
+            left: 15px;
+        }
+        
+        .message::after {
+            bottom: -40px;
+            right: 15px;
+        }
+        
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .from {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--white);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to right, var(--gold-light), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 20px;
+            animation: nameFloat 4s infinite ease-in-out;
+        }
+        
+        .name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold-light), var(--gold-dark), transparent);
+            border-radius: 10px;
+        }
+        
+        .decoration {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 15;
+        }
+        
+        .decoration-item {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateZ(40px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .decoration-item:hover {
+            transform: scale(1.1) translateZ(50px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .decoration-item i {
+            color: var(--gold-light);
+            text-shadow: 0 0 10px rgba(248, 213, 108, 0.7);
+        }
+        
+        .decoration-item:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .decoration-item:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .decoration-item:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .decoration-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        .moon {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, var(--gold-light), var(--gold-dark));
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--gold-light);
+            animation: pulse 6s infinite alternate;
+            z-index: 5;
+            transform: translateZ(20px);
+        }
+        
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(10, 61, 98, 0.5);
+            transform: rotate(30deg);
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            animation: floatText 15s linear infinite;
+            z-index: 1;
+            white-space: nowrap;
+            font-style: italic;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .animal {
+            position: absolute;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+            z-index: 3;
+            animation: float 8s infinite ease-in-out;
+            transform: translateZ(10px);
+        }
+        
+        .animal-2 {
+            animation: floatHorizontal 10s infinite ease-in-out;
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-light), transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1) translateZ(20px); opacity: 0.8; box-shadow: 0 0 30px var(--gold-light); }
+            50% { transform: scale(1.1) translateZ(30px); opacity: 1; box-shadow: 0 0 70px var(--gold-light); }
+            100% { transform: scale(1) translateZ(20px); opacity: 0.8; box-shadow: 0 0 30px var(--gold-light); }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+        
+        @keyframes floatHorizontal {
+            0% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(20px) rotate(3deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        
+        @keyframes floatText {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px rgba(248, 213, 108, 0.6); }
+            100% { text-shadow: 0 0 30px rgba(248, 213, 108, 0.9); }
+        }
+        
+        @keyframes nameFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes colorShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes explode {
+            0% { transform: translate(var(--x, 0), var(--y, 0)) scale(0); opacity: 1; }
+            100% { transform: translate(var(--x, 0), var(--y, 0)) scale(1); opacity: 0; }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 500px) {
+            .card {
+                padding: 30px 20px;
+            }
+            
+            .arabic-text {
+                font-size: 2.8rem;
+            }
+            
+            .title {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 1.5rem;
+                padding: 20px 15px;
+            }
+            
+            .name {
+                font-size: 3.2rem;
+            }
+            
+            .decoration-item {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+            
+            .moon {
+                width: 80px;
+                height: 80px;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .moon::after {
+                width: 55px;
+                height: 55px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .arabic-text {
+                font-size: 2.3rem;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .message {
+                font-size: 1.3rem;
+                padding: 15px 10px;
+            }
+            
+            .name {
+                font-size: 2.8rem;
+            }
+            
+            .divider {
+                width: 150px;
+            }
+            
+            .decoration {
+                gap: 15px;
+            }
+            
+            .decoration-item {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
+        
+        .interactive-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+        
+        .audio-control {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .audio-control i {
+            font-size: 1.5rem;
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="stars"></div>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <!-- Moon -->
+            <div class="moon"></div>
+            
+            <!-- Floating Animals -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath fill='%23f8d56c' d='M640 224v32c0 17.7-14.3 32-32 32h-16v80c0 61.9-50.1 112-112 112s-112-50.1-112-112v-80H192v80c0 61.9-50.1 112-112 112S-32 434.9-32 373v-80h-16c-17.7 0-32-14.3-32-32v-32c0-17.7 14.3-32 32-32h60.8c-20.2-54.8 6.3-116.7 62.5-138.9 56.2-22.2 118.2 6.4 138.9 62.5h82.5c20.7-56.1 82.6-84.7 138.9-62.5 56.2 22.2 82.7 84.1 62.5 138.9H608c17.7 0 32 14.3 32 32zm-432-32h96c8.8 0 16-7.2 16-16s-7.2-16-16-16h-96c-8.8 0-16 7.2-16 16s7.2 16 16 16zm320 0h96c8.8 0 16-7.2 16-16s-7.2-16-16-16h-96c-8.8 0-16 7.2-16 16s7.2 16 16 16z'/%3E%3C/svg%3E" 
+                 alt="Cow" class="animal" style="top: 10%; left: 5%; width: 80px; height: 80px;">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath fill='%23f7a440' d='M634.2 182.1c-9.1-11.5-23.7-16.1-37.2-11.7l-128 51.2c-7.4 3-15.6 1.5-21.9-3.9l-49.1-41c-6.3-5.3-15-5.4-21.4-.1l-87.3 73.1c-5.9 4.9-14 5.1-20.1.4l-71.4-54.7c-6.4-4.9-15.1-4.9-21.5 0l-71.4 54.7c-6.1 4.7-14.2 4.5-20.1-.4l-87.3-73.1c-6.4-5.3-15.1-5.2-21.4.1l-49.1 41c-6.3 5.4-14.5 6.9-21.9 3.9l-128-51.2c-13.5-4.4-28.1.2-37.2 11.7-9.1 11.5-10.5 27.1-3.4 39.9l38.9 61.9c7 11.1 19.4 17.8 32.3 17.8h14.8c3.9 0 7.1 2.8 7.8 6.6l20.5 102.5c5.5 27.4 29.5 46.9 57.4 46.9h300.4c27.9 0 51.9-19.5 57.4-46.9l20.5-102.5c.7-3.8 3.9-6.6 7.8-6.6h14.8c12.9 0 25.3-6.7 32.3-17.8l38.9-61.9c7.1-12.8 5.7-28.4-3.4-39.9z'/%3E%3C/svg%3E" 
+                 alt="Goat" class="animal-2" style="top: 80%; left: 80%; width: 70px; height: 70px;">
+            
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath fill='%23ffffff' d='M635.8 176.1l-12.2-12.9c-9-9.5-24.2-9.6-33.2-.1l-79.2 79.3-79.2-79.3c-9-9.5-24.2-9.5-33.2.1l-12.2 12.9c-9 9.5-8.9 24.7.1 34.1l90.1 90.2c9 9.5 24.2 9.6 33.2.1l90.1-90.2c9.1-9.4 9.2-24.6.1-34.1zM320 32c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V48c0-8.8-7.2-16-16-16h-32zm-64 96c-61.9 0-112 50.1-112 112 0 37 18.5 69.8 46.8 89.7 6.5 4.6 8.8 13.1 5.5 20.3l-12.3 27.3c-3.2 7.1-10.6 11.2-18.3 10.1l-30.8-4.6c-12.1-1.8-20.7-13.1-19.6-25.3l5.1-50.2c1.1-10.9-5.9-20.9-16.6-23.7l-28.7-7.2c-12.3-3.1-20.5-14.9-18.8-27.5l8.4-62.2C99.4 228.3 112 212.2 128 202.1V208c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v5.9c-16 10.1-28.6 26.2-32.5 45.1l-8.4 62.2c-1.7 12.6 6.5 24.4 18.8 27.5l28.7 7.2c10.7 2.7 17.7 12.8 16.6 23.7l-5.1 50.2c-1.1 12.2 7.5 23.5 19.6 25.3l30.8 4.6c7.7 1.1 15.1-3 18.3-10.1l12.3-27.3c3.3-7.3 1-15.8-5.5-20.3C166.5 309.8 148 277 148 240c0-61.9 50.1-112 112-112h8c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16h-8z'/%3E%3C/svg%3E" 
+                 alt="Camel" class="animal" style="top: 60%; left: 70%; width: 90px; height: 90px;">
+            
+            <!-- Floating Text Elements -->
+            <div class="floating-text" style="top: 15%; animation-delay: 0s;">Eid Mubarak ✨</div>
+            <div class="floating-text" style="top: 25%; animation-delay: 2s;">Blessed Eid 🕌</div>
+            <div class="floating-text" style="top: 35%; animation-delay: 4s;">Joy & Happiness 🎉</div>
+            <div class="floating-text" style="top: 85%; animation-delay: 1s;">Peace & Prosperity ☪️</div>
+            
+            <!-- Content -->
+            <div class="card-header">
+                <div class="arabic-text">عيد الأضحى المبارك</div>
+                <div class="title">EID MUBARAK</div>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="message">
+                Wishing you and your family a joyous and blessed Eid-ul-Adha. May your heart be filled with love and your home with laughter. May Allah accept your sacrifices and grant you happiness, peace, and prosperity.
+            </div>
+            
+            <div class="decoration">
+                <div class="decoration-item"><i class="fas fa-mosque"></i></div>
+                <div class="decoration-item"><i class="fas fa-star-and-crescent"></i></div>
+                <div class="decoration-item"><i class="fas fa-hands-praying"></i></div>
+            </div>
+            
+            <div class="signature">
+                <div class="from">With warm wishes from</div>
+                <div class="name">Nuhad</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            May the blessings of Allah fill your life with happiness and open all the doors of success
+        </div>
+    </div>
+    
+    <div class="audio-control">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <div class="interactive-area" id="interactiveArea"></div>
+    
+    <script>
+        // Create dynamic stars
+        document.addEventListener('DOMContentLoaded', function() {
+            const scene = document.querySelector('.scene');
+            const colors = ['#f8e8b0', '#ffffff', '#fbbf24', '#93c5fd'];
+            
+            // Create 100 random stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.position = 'absolute';
+                
+                // Random size between 1px and 3px
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation duration
+                const duration = Math.random() * 5 + 3;
+                star.style.animationDuration = `${duration}s`;
+                
+                // Random color
+                star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                scene.appendChild(star);
+            }
+            
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.position = 'absolute';
+                
+                // Random size between 2px and 8px
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation
+                const duration = Math.random() * 10 + 5;
+                particle.style.animation = `float ${duration}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                scene.appendChild(particle);
+            }
+            
+            // Create fireworks
+            function createFirework(x, y) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = `${x}px`;
+                firework.style.top = `${y}px`;
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                document.body.appendChild(firework);
+                
+                // Explode particles
+                const particles = 30;
+                for (let i = 0; i < particles; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 100 + 50;
+                    const xOffset = Math.cos(angle) * distance;
+                    const yOffset = Math.sin(angle) * distance;
+                    
+                    const particle = document.createElement('div');
+                    particle.className = 'firework particle';
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    particle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    particle.style.setProperty('--x', `${xOffset}px`);
+                    particle.style.setProperty('--y', `${yOffset}px`);
+                    particle.style.animation = `explode 1s forwards`;
+                    
+                    document.body.appendChild(particle);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+                
+                // Remove firework
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+            
+            // Interactive area for fireworks
+            const interactiveArea = document.getElementById('interactiveArea');
+            interactiveArea.addEventListener('click', (e) => {
+                createFirework(e.clientX, e.clientY);
+            });
+            
+            // Create random fireworks
+            setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createFirework(x, y);
+            }, 3000);
+            
+            // Audio control
+            const audioControl = document.querySelector('.audio-control');
+            let audioPlaying = false;
+            let audio;
+            
+            audioControl.addEventListener('click', () => {
+                if (!audioPlaying) {
+                    // Create and play audio
+                    audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+                    audio.loop = true;
+                    audio.play().catch(e => console.log("Audio play failed:", e));
+                    audioControl.innerHTML = '<i class="fas fa-pause"></i>';
+                    audioPlaying = true;
+                } else {
+                    // Pause audio
+                    audio.pause();
+                    audioControl.innerHTML = '<i class="fas fa-music"></i>';
+                    audioPlaying = false;
+                }
+            });
+            
+            // Create floating animals dynamically
+            const animals = ['cow', 'goat', 'camel', 'sheep'];
+            for (let i = 0; i < 8; i++) {
+                const animal = document.createElement('div');
+                animal.className = 'animal';
+                if (Math.random() > 0.5) animal.classList.add('animal-2');
+                
+                const animalType = animals[Math.floor(Math.random() * animals.length)];
+                const size = Math.random() * 60 + 40;
+                
+                animal.style.width = `${size}px`;
+                animal.style.height = `${size}px`;
+                animal.style.top = `${Math.random() * 100}%`;
+                animal.style.left = `${Math.random() * 100}%`;
+                animal.style.zIndex = Math.floor(Math.random() * 5) + 1;
+                animal.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                
+                // Set animal SVG
+                animal.innerHTML = `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath fill='${Math.random() > 0.5 ? '%23f8d56c' : '%23ffffff'}' d='M640 224v32c0 17.7-14.3 32-32 32h-16v80c0 61.9-50.1 112-112 112s-112-50.1-112-112v-80H192v80c0 61.9-50.1 112-112 112S-32 434.9-32 373v-80h-16c-17.7 0-32-14.3-32-32v-32c0-17.7 14.3-32 32-32h60.8c-20.2-54.8 6.3-116.7 62.5-138.9 56.2-22.2 118.2 6.4 138.9 62.5h82.5c20.7-56.1 82.6-84.7 138.9-62.5 56.2 22.2 82.7 84.1 62.5 138.9H608c17.7 0 32 14.3 32 32zm-432-32h96c8.8 0 16-7.2 16-16s-7.2-16-16-16h-96c-8.8 0-16 7.2-16 16s7.2 16 16 16zm320 0h96c8.8 0 16-7.2 16-16s-7.2-16-16-16h-96c-8.8 0-16 7.2-16 16s7.2 16 16 16z'/%3E%3C/svg%3E" alt="${animalType}" style="width:100%;height:100%;">`;
+                
+                document.querySelector('.scene').appendChild(animal);
+            }
+            
+            // Create 3D parallax effect
+            document.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth / 2 - e.clientX) / 25;
+                const y = (window.innerHeight / 2 - e.clientY) / 25;
+                
+                document.querySelector('.card').style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+                
+                // Move background elements for parallax effect
+                document.querySelector('.moon').style.transform = `translate(${x/2}px, ${y/2}px)`;
+                
+                const animals = document.querySelectorAll('.animal');
+                animals.forEach(animal => {
+                    const depth = parseInt(animal.style.zIndex) || 1;
+                    animal.style.transform = `translate(${x * depth / 2}px, ${y * depth / 2}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
